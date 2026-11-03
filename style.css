@@ -1,0 +1,154 @@
+/* ---------- colors ---------- */
+:root {
+  --background: oklch(0.18 0.05 280);
+  --foreground: oklch(0.97 0.01 90);
+  --card: oklch(0.25 0.06 285);
+  --primary: oklch(0.83 0.16 85);
+  --primary-foreground: oklch(0.2 0.05 280);
+  --accent: oklch(0.75 0.17 0);
+  --muted: oklch(0.78 0.03 280);
+  --border: oklch(1 0 0 / 15%);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  font-family: system-ui, "Segoe UI", Arial, sans-serif;
+  color: var(--foreground);
+  background: radial-gradient(circle at 50% 0%, oklch(0.32 0.1 330), var(--background) 70%);
+  overflow-x: hidden;
+  text-align: center;
+}
+
+/* ---------- confetti ---------- */
+#confetti {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* ---------- balloons ---------- */
+.balloons { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+
+.balloons span {
+  position: absolute;
+  bottom: -80px;
+  font-size: 3rem;
+  opacity: 0.8;
+  animation: rise 9s linear infinite;
+}
+.balloons span:nth-child(1) { left: 4%;  animation-delay: 0s; }
+.balloons span:nth-child(2) { left: 16%; animation-delay: 0.9s; }
+.balloons span:nth-child(3) { left: 28%; animation-delay: 1.8s; }
+.balloons span:nth-child(4) { left: 40%; animation-delay: 2.7s; }
+.balloons span:nth-child(5) { left: 52%; animation-delay: 3.6s; }
+.balloons span:nth-child(6) { left: 64%; animation-delay: 4.5s; }
+.balloons span:nth-child(7) { left: 76%; animation-delay: 5.4s; }
+.balloons span:nth-child(8) { left: 88%; animation-delay: 6.3s; }
+
+@keyframes rise { to { transform: translateY(-120vh) rotate(15deg); } }
+
+/* ---------- layout ---------- */
+.wrap {
+  position: relative;
+  z-index: 10;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  margin-top: 0.75rem;
+  font-size: clamp(2.75rem, 9vw, 4.5rem);
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-weight: 400;
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+  background-size: 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 4s linear infinite;
+}
+@keyframes shine { to { background-position: 200% center; } }
+
+.name {
+  margin-top: 0.5rem;
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ---------- photo ---------- */
+.photo-ring {
+  width: 16rem;
+  height: 16rem;
+  margin: 2.5rem auto 0;
+  padding: 6px;
+  border-radius: 9999px;
+  background: conic-gradient(var(--primary), var(--accent), var(--primary));
+  box-shadow: 0 0 60px oklch(0.75 0.17 0 / 40%);
+  animation: float 5s ease-in-out infinite;
+}
+.photo-ring img {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  object-fit: cover;
+  display: block;
+}
+@keyframes float { 50% { transform: translateY(-12px); } }
+
+/* ---------- cake ---------- */
+.cake { margin-top: 2.5rem; }
+.cake button {
+  font-size: 3.75rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+  transition: transform 0.2s;
+}
+.cake button:hover { transform: scale(1.1); }
+.cake p { margin-top: 0.5rem; font-size: 0.875rem; color: var(--muted); }
+
+/* ---------- wish card ---------- */
+.wish-card {
+  max-width: 28rem;
+  margin: 2rem auto 0;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: oklch(0.25 0.06 285 / 60%);
+  backdrop-filter: blur(8px);
+}
+.wish-card p { font-size: 1.125rem; }
+.wish-card button {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.wish-card button:hover { transform: scale(1.05); }
+
+.sign { margin-top: 2.5rem; color: var(--muted); }
+
+@media (min-width: 768px) {
+  .photo-ring { width: 20rem; height: 20rem; }
+}
